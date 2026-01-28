@@ -1,215 +1,244 @@
-/* Main App Structure */
+/* 
+   Premium Medical Design System 
+   Palette: Light Blue, White, Slate
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --primary: #0ea5e9;
+    --primary-dark: #0369a1;
+    --bg-gradient: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    --card-bg: rgba(255, 255, 255, 0.85);
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --shadow-sm: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    --shadow-md: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+    --glass-border: rgba(255, 255, 255, 0.4);
+}
+
 .stApp {
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-    color: #f8fafc;
-    font-family: 'Inter', sans-serif;
+    background: var(--bg-gradient);
+    color: var(--text-main);
+    font-family: 'Outfit', sans-serif;
 }
 
 /* Glassmorphism Sidebar */
 [data-testid="stSidebar"] {
-    background-color: rgba(30, 41, 59, 0.7);
-    backdrop-filter: blur(10px);
-    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(15px);
+    border-right: 1px solid var(--glass-border);
+}
+
+[data-testid="stSidebar"] h2,
+[data-testid="stSidebar"] h3 {
+    color: var(--primary-dark) !important;
+    background: none !important;
+    -webkit-text-fill-color: initial !important;
 }
 
 /* Container Styling */
 .main-card {
-    background: rgba(30, 41, 59, 0.6);
-    backdrop-filter: blur(12px);
-    border-radius: 20px;
-    padding: 2rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    padding: 2.5rem;
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-md);
     margin-bottom: 2rem;
+    transition: transform 0.3s ease;
+}
+
+.main-card:hover {
+    transform: translateY(-2px);
 }
 
 /* Header Styling */
 h1,
 h2,
 h3 {
-    background: linear-gradient(to right, #38bdf8, #818cf8);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: 800;
+    font-family: 'Outfit', sans-serif;
+    color: var(--primary-dark) !important;
+    background: linear-gradient(to right, #0ea5e9, #0369a1) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.02em;
 }
 
 /* Button Styling */
 .stButton>button {
-    background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+    background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
     color: white;
     border: none;
     border-radius: 12px;
-    padding: 0.6rem 2rem;
+    padding: 0.75rem 2rem;
     font-weight: 600;
-    transition: all 0.3s ease;
-    width: 100%;
+    font-family: 'Outfit', sans-serif;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(14, 165, 233, 0.2);
 }
 
 .stButton>button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.4);
+    background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(14, 165, 233, 0.3);
 }
 
 /* Input Styling */
-.stTextInput>div>div>input {
-    background: rgba(15, 23, 42, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    color: white;
+.stTextInput>div>div>input,
+.stNumberInput>div>div>input {
+    background: white !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 12px !important;
+    color: var(--text-main) !important;
+    padding: 0.6rem 1rem !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+
+.stTextInput label,
+.stNumberInput label {
+    color: var(--text-main) !important;
+    font-weight: 600 !important;
 }
 
 /* Chatbot Styles */
 .chat-bubble {
-    padding: 1rem;
-    border-radius: 15px;
-    margin-bottom: 1rem;
-    max-width: 80%;
+    padding: 1.2rem;
+    border-radius: 20px;
+    margin-bottom: 1.2rem;
+    max-width: 85%;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    box-shadow: var(--shadow-sm);
 }
 
 .user-bubble {
-    background: rgba(99, 102, 241, 0.2);
+    background: var(--primary);
+    color: white;
     align-self: flex-end;
     margin-left: auto;
-    border-bottom-right-radius: 2px;
+    border-bottom-right-radius: 4px;
 }
 
 .ai-bubble {
-    background: rgba(255, 255, 255, 0.05);
+    background: white;
+    color: var(--text-main);
     align-self: flex-start;
-    border-bottom-left-radius: 2px;
+    border-bottom-left-radius: 4px;
+    border: 1px solid #e2e8f0;
 }
 
 /* Metric Cards */
 .metric-container {
     display: flex;
     justify-content: space-between;
-    gap: 1rem;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
 }
 
 .metric-card {
-    background: rgba(255, 255, 255, 0.03);
-    padding: 1.5rem;
-    border-radius: 15px;
+    background: white;
+    padding: 1.8rem;
+    border-radius: 20px;
     flex: 1;
     text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid #e0f2fe;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+}
+
+.metric-card:hover {
+    border-color: var(--primary);
+    box-shadow: var(--shadow-md);
 }
 
 .metric-value {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #38bdf8;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 0.2rem;
 }
 
 /* Success/Error Styling */
 .result-box {
-    padding: 2rem;
-    border-radius: 15px;
+    padding: 2.5rem;
+    border-radius: 20px;
     text-align: center;
     margin-top: 2rem;
 }
 
 .high-risk {
-    background: rgba(239, 68, 68, 0.1);
-    border: 1px solid rgba(239, 68, 68, 0.4);
+    background: #fff1f2;
+    border: 2px solid #fda4af;
+    color: #9f1239;
 }
 
 .medium-risk {
-    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(251, 191, 36, 0.1) 100%);
-    border: 1px solid rgba(245, 158, 11, 0.3);
-    color: #fbbf24;
+    background: #fffbeb;
+    border: 2px solid #fcd34d;
+    color: #92400e;
 }
 
 .low-risk {
-    background: rgba(34, 197, 94, 0.1);
-    border: 1px solid rgba(34, 197, 94, 0.4);
+    background: #f0fdf4;
+    border: 2px solid #86efac;
+    color: #166534;
 }
 
 /* Login Page Styling */
 .login-container {
-    max-width: 450px;
-    margin: 5% auto;
-    padding: 3rem;
-    background: rgba(30, 41, 59, 0.7);
-    backdrop-filter: blur(20px);
+    background: white;
     border-radius: 24px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-    text-align: center;
-    animation: fadeIn 0.8s ease-out;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.login-logo {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    display: block;
+    border: 1px solid #e2e8f0;
+    box-shadow: var(--shadow-md);
 }
 
 .login-title {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
-    background: linear-gradient(to right, #6366f1, #a855f7);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.login-subtitle {
-    color: #94a3b8;
-    margin-bottom: 2rem;
-}
-
-.stTextInput label {
-    color: #e2e8f0 !important;
-    font-weight: 500;
+    color: var(--primary-dark);
+    font-size: 2.2rem;
 }
 
 /* Tab Styling */
 .stTabs [data-baseweb="tab-list"] {
-    gap: 2rem;
-    background-color: transparent;
-    padding: 0.5rem 1rem;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.05);
+    gap: 1.5rem;
+    background-color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 16px;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-sm);
 }
 
 .stTabs [data-baseweb="tab"] {
-    height: 50px;
-    white-space: pre-wrap;
-    background-color: transparent;
-    border-radius: 10px 10px 0 0;
-    gap: 0px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    color: #94a3b8;
+    height: auto;
+    padding: 0.8rem 2rem;
+    color: var(--text-muted);
     font-weight: 600;
-    transition: all 0.3s ease;
+    border-radius: 12px;
 }
 
 .stTabs [aria-selected="true"] {
-    background-color: rgba(99, 102, 241, 0.1) !important;
-    color: #38bdf8 !important;
-    border-bottom: 3px solid #38bdf8 !important;
+    background-color: var(--primary) !important;
+    color: white !important;
+    box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3) !important;
 }
 
-.stTabs [data-baseweb="tab"]:hover {
-    color: #f8fafc;
-    background-color: rgba(255, 255, 255, 0.05);
+/* Form Styling */
+[data-testid="stForm"] {
+    border: none !important;
+    padding: 0 !important;
 }
 
-/* Hide sidebar toggle if possible or style it */
+/* Hide sidebar navigation default */
 [data-testid="stSidebarNav"] {
+    display: none;
+}
+
+[data-testid="stSidebar"] {
+    display: none;
+}
+
+[data-testid="collapsedControl"] {
     display: none;
 }
