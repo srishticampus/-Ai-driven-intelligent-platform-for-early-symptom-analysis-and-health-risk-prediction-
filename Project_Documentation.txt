@@ -1,0 +1,122 @@
+# Project Documentation: AI-Driven Intelligent Platform for Early Symptom Analysis
+
+This document provides a comprehensive overview of the code files, datasets, and advanced implementation features integrated into the Intelligent Health Platform (75% Milestone).
+
+---
+
+## 1. Project Overview
+The platform is an intelligent medical diagnostic assistant that processes laboratory reports (PDF) and patient-reported symptoms to predict health risks across 12 critical disease categories. It combines Machine Learning, Rule-Based Clinical Logic, and a Medical Knowledge Chatbot (60,000+ QA pairs) to provide a localized digital twin for health monitoring.
+
+---
+
+## 2. Dynamic Diagnostic Workflow
+The system implements a **Sequential Four-Step Logic** to ensure data integrity and user engagement:
+1. **Extraction Phase:** The user uploads a PDF. The system extracts diagnostic markers using an advanced Fuzzy Regex engine.
+2. **Review Phase:** Extracted values are displayed in a "Standardized Diagnostic Data" table for patient verification.
+3. **Clinical Integration:** The user selects current symptoms. The system merges these with the PDF data.
+4. **Analysis Phase:** Upon clicking "Finalize Assessment," the system calculates all risks and displays the multi-disease dashboard.
+
+---
+
+## 3. Core System Features
+
+### A. Advanced Medical Extraction Engine (App.py)
+*   **Fuzzy Regex Mapping:** Uses resilient patterns that handle spacing, punctuation, and synonym variations (e.g., "S. Albumin", "Serum Albumin", and "Albumin" are all mapped to the same canonical key).
+*   **Text Sanitization:** Automatically cleans non-printable PDF control characters that often break data extraction.
+*   **Debug Visibility:** Includes a "Debug: Raw Text" view for troubleshooting exactly what the system extracts from a document.
+
+### B. Integrated Risk Scoring (70/30 Rule)
+*   **Weighted Average:** The final risk score is calculated as:
+    *   **70% Weight:** Derived from Machine Learning models or Clinical Rule-sets.
+    *   **30% Weight:** Derived from the density of patient-reported symptoms.
+*   **Integrated Calculation:** Ensures that a high lab value can be "confirmed" or "downgraded" by the absence or presence of physical symptoms.
+
+### C. Clinical Overrides & Intensity Logic
+*   **Critical Thresholds:** Implements high-intensity overrides (0.98 probability) for severe biomarkers.
+    *   *Example:* If Bilirubin > 1.2 or Creatinine > 1.3, the system forces a High Risk category regardless of other symptoms.
+*   **Cross-Disease Verification:** High-risk indicators in one disease (like Hepatitis) can cross-influence risk indicators in related organs (like Kidney) for holistic analysis.
+
+### D. Health Risk Overview Dashboard
+*   **Visual Alerting:** Uses horizontal progress bars color-coded for risk intensity.
+*   **Priority Sorting:** Automatically sorts 12 disease risks by severity (highest risks at the top).
+*   **Diagnostic Summary:** A quick-glance card summarizing "High Risk Factors" and "Caution Points."
+
+---
+
+## 4. Disease Categories Covered
+
+### 🏥 Clinical Diseases (ML Models)
+1.  **Parkinson's Disease:** 22 voice marker features.
+2.  **Hepatitis:** Bio-marker analysis (Bilirubin, Albumin).
+3.  **Chronic Kidney Disease (CKD):** Creatinine/Urea/Age integration.
+4.  **Heart Disease:** BP/Cholesterol/MaxHR analysis.
+5.  **Thyroid Disease:** TSH/T3/Hormone profile.
+6.  **Liver Disease:** Enzyme and protein balance check.
+
+### 🥗 Lifestyle Profiling (Integrated Analysis)
+7.  **Diabetes:** Glucose levels + symptom density.
+8.  **Hypertension:** Blood pressure monitoring.
+9.  **Obesity:** BMI-based risk stratification.
+10. **Anemia:** Hemoglobin levels.
+11. **Fatty Liver:** Liver enzyme analysis.
+12. **High Cholesterol:** Lipid profile monitoring.
+
+---
+
+## 5. Technical Implementation Details
+
+### UI & Security (app.py)
+*   **Dashboard Security:** Sign-In/Registration system with session persistence.
+*   **Clean-Slate Reset:** Uses **Dynamic Widget Keys** to ensure that clicking "Reset Analysis" completely clears the file uploader and all internal session states.
+*   **Tabbed Interface:** Separates complex clinical analysis from lifestyle profiling for better readability.
+
+### Chatbot Architecture (chatbot_engine.py)
+*   **MedQuAD Integration:** Trained on NIH expert data (60,000+ medical questions).
+*   **Cosine Similarity:** Matches user queries to the database using TF-IDF vectorization for near-instant response.
+
+---
+
+## 6. Clinical Risk Thresholds
+
+The system categorizes results based on the following mathematical thresholds:
+
+*   🔴 **High Risk: 70% and above**
+    *   *Advice:* Immediate medical consultation is recommended.
+*   🟡 **Medium Risk: 35% to 69%**
+    *   *Advice:* Regular monitoring and lifestyle changes are advised.
+*   🟢 **Low Risk: Below 35%**
+    *   *Advice:* Maintain healthy routine and regular checkups.
+
+---
+
+## 7. How to Run the Project
+
+Follow these steps to set up and launch the application locally:
+
+### Prerequisites
+*   **Python 3.9+** installed on your system.
+*   The project folder containing all `.csv` datasets and `.py` source files.
+
+### Step 1: Set up a Virtual Environment (Recommended)
+Open your terminal in the project directory and run:
+```bash
+python -m venv venv
+venv\Scripts\activate  # For Windows
+source venv/bin/activate  # For Linux/Mac
+```
+
+### Step 2: Install Dependencies
+Install the required Python libraries using the `requirements.txt` file:
+```bash
+pip install -r requirements.txt
+```
+
+### Step 3: Launch the Application
+Start the Streamlit web server:
+```bash
+streamlit run app.py
+```
+
+### Step 4: Access the Portal
+Once launched, the terminal will provide a Local URL (usually `http://localhost:8501`). Copy this into your web browser to access the **Intelligent Health Portal**.
+
